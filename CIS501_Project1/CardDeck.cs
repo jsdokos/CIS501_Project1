@@ -8,6 +8,28 @@ namespace CIS501_Project1
 {
     class CardDeck
     {
-        private PlayingCard Deck = new PlayingCard();
+        private PlayingCard[] Deck = new PlayingCard[53];
+
+        private int topIndex;
+
+        public CardDeck(int suit, int rank)
+        {
+            
+        }
+
+        private void Draw()
+        {
+            
+        }
+
+        private void Shuffle()
+        {
+            
+        }
+
+        private void ReturnCard(PlayingCard card)
+        {
+            
+        }
     }
 }

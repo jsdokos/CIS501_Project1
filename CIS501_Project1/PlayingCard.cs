@@ -23,6 +23,12 @@ namespace CIS501_Project1
 
         private bool FaceUp { get; }
 
+        public PlayingCard(int Suit, int Rank)
+        {
+            this.Suit = (CardSuit) Suit;
+            this.Rank = Rank;
+        }
+
         public override string ToString()
         {
             if (FaceUp)
@@ -33,5 +39,6 @@ namespace CIS501_Project1
             {
                 return "XX";
             }
+        }
     }
 }
