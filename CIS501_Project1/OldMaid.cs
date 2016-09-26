@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CIS501_Project1
 {
-    class HumanPlayer : Player
+    class OldMaid
     {
-        public override void Deal(PlayingCard card)
-        {
-            card.FaceUp = true;
-        }
+        public CardDeck Deck;
+        public List<Player> currentPlayers;
+        public int numPlayers;
+
     }
 }

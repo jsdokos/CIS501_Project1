@@ -10,7 +10,7 @@ namespace CIS501_Project1
     {
         enum CardSuit
         {
-            Joker,
+            Joker=1,
             Hearts,
             Diamonds,
             Clubs,
@@ -19,9 +19,22 @@ namespace CIS501_Project1
 
         private CardSuit Suit { get; }
 
+        //0 2
+        //1 3
+        //2 4
+        //3 5
+        //4 6
+        //5 7
+        //6 8
+        //7 9
+        //8 10
+        //9 Jack
+        //10 Queen
+        //11 King
+        //12 Ace
         private int Rank { get; }
 
-        private bool FaceUp { get; }
+        public bool FaceUp { get; set; }
 
         public PlayingCard(int Suit, int Rank)
         {

@@ -21,10 +21,17 @@ namespace CIS501_Project1
             get { return Hand.Length;  }
         }
 
-
+        //Using example code from http://rosettacode.org/wiki/Knuth_shuffle
         private void Shuffle()
         {
-            //TODO http://rosettacode.org/wiki/Knuth_shuffle
+            Random random = new Random();
+            for (int i = 0; i < Hand.Length; i++)
+            {
+                int j = random.Next(i, Hand.Length);
+                PlayingCard temp = Hand[i];
+                Hand[i] = Hand[j];
+                Hand[j] = temp;
+            }
         }
 
         private void DiscardAllPairs()
@@ -34,22 +41,34 @@ namespace CIS501_Project1
 
         public virtual void Deal(PlayingCard card)
         {
-            
+        
         }
 
         private PlayingCard PickCardAt(int i)
         {
-            
+            PlayingCard temp = Hand[i];
+            Hand[i] = Hand[topIndex];
+            topIndex--;
+            return temp;
         }
 
         private void AddCard(PlayingCard card)
         {
-            
+            //TODO find duplicates
+            topIndex++;
+            Hand[topIndex] = card;
         }
 
         public override string ToString()
         {
-            
+            StringBuilder st = new StringBuilder();
+
+            foreach (PlayingCard card in Hand)
+            {
+                st.Append(card.ToString() + " ");
+            }
+
+            return st.ToString();
         }
 
         private void ReturnHandToDeck()
