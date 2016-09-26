@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CardDeck.cs" />
     <Compile Include="ComputerPlayer.cs" />
+    <Compile Include="ConsoleTerminal.cs" />
     <Compile Include="HumanPlayer.cs" />
     <Compile Include="ITerminal.cs" />
     <Compile Include="OldMaid.cs" />
@@ -55,6 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scratch.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

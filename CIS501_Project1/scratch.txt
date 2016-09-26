@@ -1,0 +1,8 @@
+﻿                    if (playResponse == "N" || playResponse == "Y")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        throw new FormatException();
+                    }

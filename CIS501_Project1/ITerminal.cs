@@ -6,27 +6,16 @@ using System.Threading.Tasks;
 
 namespace CIS501_Project1
 {
-    class ITerminal
+    interface ITerminal
     {
+        void Display(string s);
 
-        public void Display(string s)
-        {
-            Console.Write(s);
-        }
+        void DisplayLine(string s);
 
-        public void DisplayLine(string s)
-        {
-            Console.WriteLine(s);
-        }
+        char getChar(string prompt, string chars);
 
-        public char getChar(string prompt, string chars)
-        {
-            Display(prompt);
+        string GetString(string prompt, int length);
 
-            string playresponse = "";
-            playresponse = Console.ReadLine();
-            int index = playresponse.IndexOf(chars);
-            //TODO this
-        }
+        int GetInt(string prompt, int min, int max);
     }
 }
