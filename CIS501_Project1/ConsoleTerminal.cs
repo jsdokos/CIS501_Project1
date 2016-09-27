@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CIS501_Project1
 {
-    class ConsoleTerminal : ITerminal
+    public class ConsoleTerminal : ITerminal
     {
         public void Display(string s)
         {
@@ -20,7 +20,7 @@ namespace CIS501_Project1
 
         public char getChar(string prompt, string chars) //TODO Test
         {
-
+            bool acceptable = false;
             Console.Write(prompt);
 
             string playResponse = "";
@@ -43,7 +43,7 @@ namespace CIS501_Project1
                     {
                         if (playResponse[0] == acceptableAnswers[i])
                         {
-                            break;
+                            acceptable = true;
                         }
                     }
 
@@ -54,14 +54,13 @@ namespace CIS501_Project1
                     Console.Write(prompt);
                 }
             }
-            while (true);
+            while (!acceptable);
 
             return playResponse[0];
         }
 
         public string GetString(string prompt, int length)
         {
-
             Console.Write(prompt);
             string playResponse = "";
             do

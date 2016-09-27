@@ -10,6 +10,11 @@ namespace CIS501_Project1
     
     class ComputerPlayer : Player
     {
+        //sizeof hand is (53/#players + 2)
+        public ComputerPlayer(int numPlayers, string name) : base(numPlayers, name)
+        {
+            
+        }
         private string MakeCardIndices()
         {
             StringBuilder st = new StringBuilder();

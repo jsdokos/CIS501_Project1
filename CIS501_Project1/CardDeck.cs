@@ -12,17 +12,18 @@ namespace CIS501_Project1
 
         private int topIndex;
 
-        public CardDeck()
+        public CardDeck() //finish making old maid
         {
             int count = 0;
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 13; j++)
                 {
-                    Deck[count] = new PlayingCard(i + 1, j);
+                    Deck[count] = new PlayingCard(i, j);
                     count++;
                 }
             }
+            //Deck[52] = new PlayingCard(5, );
         }
 
         public CardDeck(int suit, int rank)
@@ -30,7 +31,7 @@ namespace CIS501_Project1
             
         }
 
-        private PlayingCard Draw()
+        public PlayingCard Draw()
         {
             PlayingCard temp = Deck[topIndex];
             Deck[topIndex] = null;
@@ -39,7 +40,7 @@ namespace CIS501_Project1
         }
 
         //Using example code from http://rosettacode.org/wiki/Knuth_shuffle
-        private void Shuffle()
+        public void Shuffle()
         {
             Random random = new Random();
             for (int i = 0; i < Deck.Length; i++)

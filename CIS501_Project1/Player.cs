@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace CIS501_Project1
 {
     class Player
     {
-        private PlayingCard[] Hand = new PlayingCard[53]; //TODO Change this
+        private PlayingCard[] Hand;
 
         private int topIndex;
 
@@ -19,6 +20,13 @@ namespace CIS501_Project1
         public int NumCardsInHand
         {
             get { return Hand.Length;  }
+        }
+
+        public Player(int numPlayers, string name)
+        {
+            Hand = new PlayingCard[53/ numPlayers + 2];
+            Name = name;
+            Deck = new CardDeck();
         }
 
         //Using example code from http://rosettacode.org/wiki/Knuth_shuffle
@@ -34,9 +42,40 @@ namespace CIS501_Project1
             }
         }
 
-        private void DiscardAllPairs()
+        public void DiscardAllPairs()
         {
-            
+            PlayingCard[] temp = new PlayingCard[13];
+
+            for (int i = 0; i < temp.Length; i++)
+            {
+                temp[i] = null;
+            }
+
+            for (int i = 0; i < Hand.Length; i++)
+            {
+                PlayingCard card = Hand[i];
+                Hand[i] = null;
+
+                if (temp[(int)card.Rank] != null)
+                {
+                    temp[(int)card.Rank] = card;
+                }
+                else
+                {
+                    temp[(int) card.Rank] = null;
+                    card = null;
+                }
+            }
+            int count = 0;
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (temp[i] != null)
+                {
+                    Hand[count] = temp[i];
+                    count++;
+                }
+            }
+            topIndex = count;//maybe?
         }
 
         public virtual void Deal(PlayingCard card)
@@ -59,7 +98,7 @@ namespace CIS501_Project1
             Hand[topIndex] = card;
         }
 
-        public override string ToString()
+        public override string ToString() //TODO Wrong?
         {
             StringBuilder st = new StringBuilder();
 
@@ -73,7 +112,7 @@ namespace CIS501_Project1
 
         private void ReturnHandToDeck()
         {
-            
+            //TODO THIS
         }
     }
 }

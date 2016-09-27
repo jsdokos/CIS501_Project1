@@ -8,41 +8,44 @@ namespace CIS501_Project1
 {
     class PlayingCard
     {
-        enum CardSuit
+        public enum CardSuit
         {
-            Joker=1,
-            Hearts,
+            Hearts=1,
             Diamonds,
             Clubs,
-            Spades
+            Spades,
+            Joker
         }
 
         private CardSuit Suit { get; }
 
-        //0 2
-        //1 3
-        //2 4
-        //3 5
-        //4 6
-        //5 7
-        //6 8
-        //7 9
-        //8 10
-        //9 Jack
-        //10 Queen
-        //11 King
-        //12 Ace
-        private int Rank { get; }
+        //0 Ace
+        //1 2
+        //2 3
+        //3 4
+        //4 5
+        //5 6
+        //6 7
+        //7 8
+        //8 9
+        //9 10
+        //10 Jack
+        //11 Queen
+        //12 King
+        public int Rank { get { return Rank; } set { Rank = value; } }
 
         public bool FaceUp { get; set; }
 
-        public PlayingCard(int Suit, int Rank)
+        public PlayingCard(int rank, int suit)
         {
-            this.Suit = (CardSuit) Suit;
-            this.Rank = Rank;
+            Suit = (CardSuit) suit;
+            if (rank >= 0 || rank <= 12)
+            {
+                Rank = rank;
+            }
         }
 
-        public override string ToString()
+        public override string ToString() //TODO FIX
         {
             if (FaceUp)
             {
