@@ -10,13 +10,9 @@ namespace CIS501_Project1
     abstract class Player
     {
         public PlayingCard[] Hand;
-
         public int topIndex;
-
-        private string Name; //TODO ??
-
-        private CardDeck Deck;
-
+        public string Name; //TODO ??
+        public CardDeck Deck;
         public static PlayingCard[] temp;
 
         public int NumCardsInHand
@@ -32,7 +28,7 @@ namespace CIS501_Project1
         }
 
         //Using example code from http://rosettacode.org/wiki/Knuth_shuffle
-        private void Shuffle()
+        public void Shuffle()
         {
             Random random = new Random();
             for (int i = 0; i < Hand.Length; i++)
@@ -86,7 +82,7 @@ namespace CIS501_Project1
         
         }
 
-        private PlayingCard PickCardAt(int i)
+        public PlayingCard PickCardAt(int i)
         {
             PlayingCard temp = Hand[i];
             Hand[i] = Hand[topIndex];

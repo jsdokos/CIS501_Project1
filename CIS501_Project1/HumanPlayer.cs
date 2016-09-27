@@ -17,6 +17,8 @@ namespace CIS501_Project1
         public override void Deal(PlayingCard card)
         {
             card.FaceUp = true;
+            topIndex++;
+            Hand[topIndex] = card;
         }
     }
 }

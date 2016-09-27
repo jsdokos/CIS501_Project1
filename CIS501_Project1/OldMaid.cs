@@ -22,11 +22,14 @@ namespace CIS501_Project1
             numPlayers = computerPlayer + 1;
             allPlayers = new Player[numPlayers];
 
-            HumanPlayer human = new HumanPlayer(numPlayers, "Paris");
+            HumanPlayer human = new HumanPlayer(numPlayers, "Harambe");
             allPlayers[0] = human;
+            human.Deck = Deck;
+
             for (int i = 1; i < numPlayers - 1; i++)
             {
                 ComputerPlayer temp = new ComputerPlayer(numPlayers, "Frank" + i);
+                temp.Deck = Deck;
                 allPlayers[i] = temp;
             }
 
@@ -39,6 +42,7 @@ namespace CIS501_Project1
             Deck.Shuffle();
             dealCards();
             showAllPlayerHands();
+
             removeDuplicatesAllPlayers();
             shufflePlayers();
             showAllPlayerHands();
@@ -60,13 +64,17 @@ namespace CIS501_Project1
 
         private void dealCards()
         {
-            for (int i = 0; i < 53; i++)
+            int count = 0;
+
+            while (count < 53)
             {
                 foreach (Player play in currentPlayers)
                 {
-                    play.Deal(Deck.Draw());
+                    if (count != 53)
+                        play.Deal(Deck.Draw());
+                    count++;
                 }
-            }
+            } 
         }
 
         private void showAllPlayerHands()

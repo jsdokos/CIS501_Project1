@@ -15,11 +15,11 @@ namespace CIS501_Project1
         public CardDeck() //finish making old maid
         {
             int count = 0;
-            for (int i = 0; i < 4; i++)
+            for (int i = 1; i < 5; i++)
             {
-                for (int j = 0; j < 13; j++)
+                for (int j = 1; j < 14; j++)
                 {
-                    Deck[count] = new PlayingCard(i, j);
+                    Deck[count] = new PlayingCard(i, j, false);
                     count++;
                 }
             }
