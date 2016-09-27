@@ -33,6 +33,8 @@ namespace CIS501_Project1
 #else
             card.FaceUp = false;
 #endif
+            topIndex++;
+            Hand[topIndex] = card;
         }
     }
 }

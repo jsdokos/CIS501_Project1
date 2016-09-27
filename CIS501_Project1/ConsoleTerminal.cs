@@ -47,7 +47,10 @@ namespace CIS501_Project1
                         }
                     }
 
-                    throw new InsufficientExecutionStackException();
+                    if (!acceptable)
+                    {
+                        throw new AccessViolationException("Why would you do this to me?");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -59,7 +62,7 @@ namespace CIS501_Project1
             return playResponse[0];
         }
 
-        public string GetString(string prompt, int length)
+        public string GetString(string prompt, int length) //TODO addddd in if length is 0
         {
             Console.Write(prompt);
             string playResponse = "";
@@ -69,7 +72,7 @@ namespace CIS501_Project1
                 {
                     playResponse = Console.ReadLine();
 
-                    if (playResponse.Length >= length)
+                    if (playResponse.Length == length)
                     {
                         break;
                     }
@@ -83,7 +86,7 @@ namespace CIS501_Project1
                     Console.Write(prompt);
                 }
             }
-            while (playResponse.Length >= length);
+            while (playResponse.Length == length);
 
             return playResponse;
         }

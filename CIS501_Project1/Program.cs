@@ -10,6 +10,8 @@ namespace CIS501_Project1
     {
         static void Main(string[] args)
         {
+            OldMaid om = new OldMaid();
+            om.myProgram();
         }
     }
 }

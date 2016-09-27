@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace CIS501_Project1
 {
-    class Player
+    abstract class Player
     {
-        private PlayingCard[] Hand;
+        public PlayingCard[] Hand;
 
-        private int topIndex;
+        public int topIndex;
 
         private string Name; //TODO ??
 
         private CardDeck Deck;
+
+        public static PlayingCard[] temp;
 
         public int NumCardsInHand
         {
@@ -44,7 +46,7 @@ namespace CIS501_Project1
 
         public void DiscardAllPairs()
         {
-            PlayingCard[] temp = new PlayingCard[13];
+            temp = new PlayingCard[13];
 
             for (int i = 0; i < temp.Length; i++)
             {
@@ -72,6 +74,7 @@ namespace CIS501_Project1
                 if (temp[i] != null)
                 {
                     Hand[count] = temp[i];
+                    temp[i] = null;
                     count++;
                 }
             }
