@@ -28,11 +28,6 @@ namespace CIS501_Project1
             //Deck[52] = new PlayingCard(5, );
         }
 
-        public CardDeck(int suit, int rank)
-        {
-            
-        }
-
         public PlayingCard Draw()
         {
             PlayingCard temp = Deck[topIndex];

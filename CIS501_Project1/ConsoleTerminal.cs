@@ -18,7 +18,7 @@ namespace CIS501_Project1
             Console.WriteLine(s);
         }
 
-        public char getChar(string prompt, string chars) //TODO Test
+        public char getChar(string prompt, string chars) 
         {
             bool acceptable = false;
             Console.Write(prompt);
@@ -91,7 +91,7 @@ namespace CIS501_Project1
             return playResponse;
         }
 
-        public int GetInt(string prompt, int min, int max) //TODO Test
+        public int GetInt(string prompt, int min, int max) 
         {
             Console.Write(prompt);
             int answer = -1000;

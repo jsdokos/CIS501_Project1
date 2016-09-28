@@ -12,7 +12,7 @@ namespace CIS501_Project1
         public List<Player> currentPlayers;
         public int numPlayers;
         public Player[] allPlayers;
-        ConsoleTerminal console;
+        public ConsoleTerminal console;
 
         public OldMaid()
         {
@@ -189,6 +189,7 @@ namespace CIS501_Project1
                 {
                     playNext = false;
                     console.DisplayLine("@@@@@Player " + currentPlayers[0].Name + " is the LOSER.@@@@@");
+                    currentPlayers[0].ReturnHandToDeck();
                     break;
                 }
 

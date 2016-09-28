@@ -128,7 +128,7 @@ namespace CIS501_Project1
             return st.ToString();
         }
 
-        private void ReturnHandToDeck()
+        public void ReturnHandToDeck()
         {
             foreach (PlayingCard card in Hand)
             {
