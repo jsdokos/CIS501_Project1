@@ -10,11 +10,12 @@ namespace CIS501_Project1
     {
         private PlayingCard[] Deck = new PlayingCard[53];
 
-        private int topIndex;
+        public int topIndex;
 
         public CardDeck() //finish making old maid
         {
             int count = 0;
+            topIndex = Deck.Length - 1;
             for (int i = 1; i < 5; i++)
             {
                 for (int j = 1; j < 14; j++)

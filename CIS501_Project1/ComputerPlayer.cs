@@ -17,9 +17,10 @@ namespace CIS501_Project1
         public string MakeCardIndices()
         {
             StringBuilder st = new StringBuilder();
+            st.Append("Index :  ");
             for (int i = 0; i < NumCardsInHand; i ++)
             {
-                st.Append(i + " "); //TODO adjust formatting
+                st.Append(i + "  "); //TODO adjust formatting
             }
 
             return st.ToString();

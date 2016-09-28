@@ -21,13 +21,13 @@ namespace CIS501_Project1
         static readonly string[] arraySuits = { "C", "H", "D", "S", "O" };
         static readonly string[] arrayRanks = { "M", "A", "2", "3", "4", "5", "6", "7", "8", "9", "0", "J", "Q", "K" };
 
-        public int Rank { get { return Rank; } set { Rank = value; } }
+        public int Rank { get; set; }
 
         public bool FaceUp { get; set; }
 
         public PlayingCard(int rank, int suit, bool face)
         {
-            Rank = rank;
+            this.Rank = rank;
             Suit = (CardSuit) suit;
             FaceUp = face;
         }

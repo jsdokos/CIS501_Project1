@@ -12,7 +12,13 @@ namespace CIS501_Project1
         public List<Player> currentPlayers;
         public int numPlayers;
         public Player[] allPlayers;
-        ConsoleTerminal console = new ConsoleTerminal();
+        ConsoleTerminal console;
+
+        public OldMaid()
+        {
+            currentPlayers = new List<Player>();
+            console = new ConsoleTerminal();
+        }
 
         public void myProgram()
         {
@@ -22,11 +28,11 @@ namespace CIS501_Project1
             numPlayers = computerPlayer + 1;
             allPlayers = new Player[numPlayers];
 
-            HumanPlayer human = new HumanPlayer(numPlayers, "Harambe");
+            HumanPlayer human = new HumanPlayer(numPlayers, "JacobD");
             allPlayers[0] = human;
             human.Deck = Deck;
 
-            for (int i = 1; i < numPlayers - 1; i++)
+            for (int i = 1; i < numPlayers; i++)
             {
                 ComputerPlayer temp = new ComputerPlayer(numPlayers, "Frank" + i);
                 temp.Deck = Deck;
@@ -82,7 +88,7 @@ namespace CIS501_Project1
             {
                 foreach (Player play in currentPlayers)
                 {
-                    if (count != 53)
+                    if (count < 53)
                         play.Deal(Deck.Draw());
                     count++;
                 }
@@ -132,6 +138,7 @@ namespace CIS501_Project1
                 //if (String.Compare(currentPlayers[drawee].GetType().ToString(), "HumanPlayer") == 0)
                 if (currentPlayers[drawer].isHuman && currentPlayers[drawer].NumCardsInHand != 0)
                 {
+                    console.DisplayLine("");
                     console.DisplayLine("%%%%%%%%%%It is now the User's turn%%%%%%%%%%");
                     console.DisplayLine(currentPlayers[drawer].ToString());
                     console.DisplayLine(currentPlayers[drawee].ToString());
@@ -139,7 +146,7 @@ namespace CIS501_Project1
                     ComputerPlayer temp = (ComputerPlayer) currentPlayers[drawee];
                     console.DisplayLine(temp.MakeCardIndices()); //there has to be a better way
 
-                    int takenCard = console.GetInt("Pick One Card from Player" + drawee, 0,
+                    int takenCard = console.GetInt("Pick One Card from Player " + drawee + " ", 0,
                         currentPlayers[drawee].NumCardsInHand);
 
                     PlayingCard card = currentPlayers[drawee].PickCardAt(takenCard);
@@ -157,6 +164,7 @@ namespace CIS501_Project1
                     PlayingCard card = currentPlayers[drawee].PickCardAt(cardToTake);
 
                     currentPlayers[drawer].AddCard(card);
+                    console.DisplayLine("");
                     console.DisplayLine("Player " + currentPlayers[drawer].Name + " picks up Player " + currentPlayers[drawee].Name + "'s Card at [" + cardToTake + "], Card: " + card.ToString());
                 }
 
@@ -174,16 +182,6 @@ namespace CIS501_Project1
                     }
                 }
 
-                //remove all player who are done
-                for (int i = currentPlayers.Count; i != 0; i--)
-                {
-                    if (currentPlayers[i].NumCardsInHand == 0)
-                    {
-                        currentPlayers.Remove(currentPlayers[i]);
-                        console.DisplayLine("+++++Player " + currentPlayers[0].Name + " has finished playing.+++++");
-                    }
-                }
-
                 shuffleAllPlayerHands();
                 showAllPlayerHands();
 
@@ -198,6 +196,16 @@ namespace CIS501_Project1
                 if (drawer > currentPlayers.Count - 1)
                 {
                     drawer = 0; //might work?
+                }
+
+                //remove all player who are done
+                for (int i = currentPlayers.Count - 1; i >= 0; i--)
+                {
+                    if (currentPlayers[i].NumCardsInHand == 0)
+                    {
+                        currentPlayers.Remove(currentPlayers[i]);
+                        console.DisplayLine("+++++Player " + currentPlayers[0].Name + " has finished playing.+++++");
+                    }
                 }
             }
             while (playNext);

@@ -102,7 +102,7 @@ namespace CIS501_Project1
                 {
                     answer = Convert.ToInt32(Console.ReadLine());
 
-                    if (answer >= min || answer <= max)
+                    if (answer >= min && answer <= max)
                     {
                         break;
                     }
@@ -116,7 +116,7 @@ namespace CIS501_Project1
                     Console.Write(prompt);
                 }
             }
-            while (answer >= min || answer <= max);
+            while (answer <= min || answer >= max);
 
             return answer;
 
@@ -124,7 +124,7 @@ namespace CIS501_Project1
 
         public void userWait()
         {
-            Display("Press <Return> to continue");
+            Display("Press <Return> to continue  ");
             Console.ReadLine();
         }
     }

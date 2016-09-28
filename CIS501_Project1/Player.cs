@@ -35,7 +35,7 @@ namespace CIS501_Project1
 
         public Player(int numPlayers, string name)
         {
-            Hand = new PlayingCard[53/ numPlayers + 2];
+            Hand = new PlayingCard[53 / numPlayers + 2];
             Name = name;
             Deck = new CardDeck();
         }
@@ -44,9 +44,9 @@ namespace CIS501_Project1
         public void Shuffle()
         {
             Random random = new Random();
-            for (int i = 0; i < Hand.Length; i++)
+            for (int i = 0; i < topIndex; i++)
             {
-                int j = random.Next(i, Hand.Length);
+                int j = random.Next(i, topIndex);
                 PlayingCard temp = Hand[i];
                 Hand[i] = Hand[j];
                 Hand[j] = temp;
@@ -55,7 +55,7 @@ namespace CIS501_Project1
 
         public void DiscardAllPairs()
         {
-            temp = new PlayingCard[13];
+            temp = new PlayingCard[15];
 
             for (int i = 0; i < temp.Length; i++)
             {
@@ -67,14 +67,17 @@ namespace CIS501_Project1
                 PlayingCard card = Hand[i];
                 Hand[i] = null;
 
-                if (temp[(int)card.Rank] != null)
+                if (card != null)
                 {
-                    temp[(int)card.Rank] = card;
-                }
-                else
-                {
-                    temp[(int) card.Rank] = null;
-                    card = null;
+                    if (temp[(int)card.Rank] == null)
+                    {
+                        temp[(int)card.Rank] = card;
+                    }
+                    else
+                    {
+                        temp[(int)card.Rank] = null;
+                        card = null;
+                    }
                 }
             }
             int count = 0;
@@ -106,6 +109,7 @@ namespace CIS501_Project1
             //TODO find duplicates
             topIndex++;
             Hand[topIndex] = card;
+            DiscardAllPairs();
         }
 
         public override string ToString() //TODO Wrong?
@@ -114,7 +118,10 @@ namespace CIS501_Project1
             st.Append(this.Name + " : ");
             foreach (PlayingCard card in Hand)
             {
-                st.Append(card.ToString() + " ");
+                if (card != null)
+                {
+                    st.Append(card.ToString() + " ");
+                }
             }
 
             return st.ToString();
