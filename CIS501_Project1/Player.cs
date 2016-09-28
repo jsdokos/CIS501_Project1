@@ -18,7 +18,19 @@ namespace CIS501_Project1
 
         public int NumCardsInHand
         {
-            get { return Hand.Length;  }
+            get
+            {
+                int count = 0;
+                foreach (PlayingCard card in Hand)
+                {
+                    if (card != null)
+                    {
+                        count++;
+                    }
+                }
+                return count;
+
+            }
         }
 
         public Player(int numPlayers, string name)
@@ -79,9 +91,7 @@ namespace CIS501_Project1
         }
 
         public virtual void Deal(PlayingCard card)
-        {
-        
-        }
+        {         }
 
         public PlayingCard PickCardAt(int i)
         {
@@ -91,7 +101,7 @@ namespace CIS501_Project1
             return temp;
         }
 
-        private void AddCard(PlayingCard card)
+        public void AddCard(PlayingCard card)
         {
             //TODO find duplicates
             topIndex++;

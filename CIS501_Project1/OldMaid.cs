@@ -32,27 +32,32 @@ namespace CIS501_Project1
                 temp.Deck = Deck;
                 allPlayers[i] = temp;
             }
+            bool answer = false;
 
             //do the loop
-            shufflePlayers();
-            for (int i = 0; i < allPlayers.Length; i++) //add players to currets players
+            do
             {
-                currentPlayers.Add(allPlayers[i]);
+                shufflePlayers();
+                for (int i = 0; i < allPlayers.Length; i++) //add players to currets players
+                {
+                    currentPlayers.Add(allPlayers[i]);
+                }
+                console.DisplayLine("++++++++++Shuffling and dealing cards++++++++++");
+                Deck.Shuffle();
+                dealCards();
+                showAllPlayerHands();
+                console.userWait();
+
+                console.DisplayLine("XXXXXXXXXXShuffling and dealing cardsXXXXXXXXXX");
+                removeDuplicatesAllPlayers();
+                shufflePlayers();
+                showAllPlayerHands();
+                console.userWait();
+
+                //repeat until only one player remains
+                answer = keyAlgorithim();
             }
-            console.DisplayLine("++++++++++Shuffling and dealing cards++++++++++");
-            Deck.Shuffle();
-            dealCards();
-            showAllPlayerHands();
-            console.userWait();
-
-            console.DisplayLine("XXXXXXXXXXShuffling and dealing cardsXXXXXXXXXX");
-            removeDuplicatesAllPlayers();
-            shufflePlayers();
-            showAllPlayerHands();
-            console.userWait();
-
-            //repeat until only one player remains
-
+            while (answer);
 
         }
 
@@ -100,6 +105,14 @@ namespace CIS501_Project1
             }
         }
 
+        private void shuffleAllPlayerHands()
+        {
+            foreach (Player play in currentPlayers)
+            {
+                play.Shuffle();
+            }
+        }
+
         private bool keyAlgorithim()
         {
             int drawer = 0;
@@ -110,9 +123,14 @@ namespace CIS501_Project1
             {
                 drawee = (drawer + 1) % currentPlayers.Count;
 
+                if (currentPlayers[drawee].NumCardsInHand == 0)
+                {
+                    
+                }
+
                 //might work
                 //if (String.Compare(currentPlayers[drawee].GetType().ToString(), "HumanPlayer") == 0)
-                if (currentPlayers[drawer].isHuman)
+                if (currentPlayers[drawer].isHuman && currentPlayers[drawer].NumCardsInHand != 0)
                 {
                     console.DisplayLine("%%%%%%%%%%It is now the User's turn%%%%%%%%%%");
                     console.DisplayLine(currentPlayers[drawer].ToString());
@@ -121,9 +139,60 @@ namespace CIS501_Project1
                     ComputerPlayer temp = (ComputerPlayer) currentPlayers[drawee];
                     console.DisplayLine(temp.MakeCardIndices()); //there has to be a better way
 
+                    int takenCard = console.GetInt("Pick One Card from Player" + drawee, 0,
+                        currentPlayers[drawee].NumCardsInHand);
 
+                    PlayingCard card = currentPlayers[drawee].PickCardAt(takenCard);
+
+                    currentPlayers[drawer].AddCard(card);
+
+                    console.DisplayLine("Player " + currentPlayers[drawer].Name + " picks up Player " + currentPlayers[drawee].Name + "'s Card at [" + takenCard + "], Card: " + card.ToString());
+                    console.userWait();
+                }
+                else if (currentPlayers[drawer].NumCardsInHand != 0)
+                {
+                    Random r = new Random();
+                    int cardToTake = r.Next(currentPlayers[drawee].NumCardsInHand);
+
+                    PlayingCard card = currentPlayers[drawee].PickCardAt(cardToTake);
+
+                    currentPlayers[drawer].AddCard(card);
+                    console.DisplayLine("Player " + currentPlayers[drawer].Name + " picks up Player " + currentPlayers[drawee].Name + "'s Card at [" + cardToTake + "], Card: " + card.ToString());
                 }
 
+                if (currentPlayers[drawer].NumCardsInHand > 0)
+                {
+                    while (currentPlayers[drawee].NumCardsInHand <= 0)
+                    {
+                        drawee++;
+                    }
+
+                    if (drawer == drawee)
+                    {
+                        playNext = false;
+                        break;
+                    }
+                }
+
+                //remove all player who are done
+                for (int i = currentPlayers.Count; i != 0; i--)
+                {
+                    if (currentPlayers[i].NumCardsInHand == 0)
+                    {
+                        currentPlayers.Remove(currentPlayers[i]);
+                        console.DisplayLine("+++++Player " + currentPlayers[0].Name + " has finished playing.+++++");
+                    }
+                }
+
+                shuffleAllPlayerHands();
+                showAllPlayerHands();
+
+                if (currentPlayers.Count <= 1)
+                {
+                    playNext = false;
+                    console.DisplayLine("@@@@@Player " + currentPlayers[0].Name + " is the LOSER.@@@@@");
+                    break;
+                }
 
                 drawer += 1;
                 if (drawer > currentPlayers.Count - 1)
@@ -132,6 +201,17 @@ namespace CIS501_Project1
                 }
             }
             while (playNext);
+
+            char ans = console.getChar("Do you want to play again? (Y/N)", "YN");
+
+            if (ans.Equals('Y'))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
