@@ -121,5 +121,11 @@ namespace CIS501_Project1
             return answer;
 
         }
+
+        public void userWait()
+        {
+            Display("Press <Return> to continue");
+            Console.ReadLine();
+        }
     }
 }

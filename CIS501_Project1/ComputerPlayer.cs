@@ -12,9 +12,9 @@ namespace CIS501_Project1
     {
         public ComputerPlayer(int numPlayers, string name) : base(numPlayers, name)
         {
-            
+            isHuman = false;
         }
-        private string MakeCardIndices()
+        public string MakeCardIndices()
         {
             StringBuilder st = new StringBuilder();
             for (int i = 0; i < NumCardsInHand; i ++)

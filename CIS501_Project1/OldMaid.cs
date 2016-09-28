@@ -12,13 +12,13 @@ namespace CIS501_Project1
         public List<Player> currentPlayers;
         public int numPlayers;
         public Player[] allPlayers;
-        ConsoleTerminal ct = new ConsoleTerminal();
+        ConsoleTerminal console = new ConsoleTerminal();
 
         public void myProgram()
         {
             Deck = new CardDeck();
             
-            int computerPlayer = ct.GetInt("Input Number of Computer Players (between 2 and 5) : ", 2, 5);
+            int computerPlayer = console.GetInt("Input Number of Computer Players (between 2 and 5) : ", 2, 5);
             numPlayers = computerPlayer + 1;
             allPlayers = new Player[numPlayers];
 
@@ -39,13 +39,20 @@ namespace CIS501_Project1
             {
                 currentPlayers.Add(allPlayers[i]);
             }
+            console.DisplayLine("++++++++++Shuffling and dealing cards++++++++++");
             Deck.Shuffle();
             dealCards();
             showAllPlayerHands();
+            console.userWait();
 
+            console.DisplayLine("XXXXXXXXXXShuffling and dealing cardsXXXXXXXXXX");
             removeDuplicatesAllPlayers();
             shufflePlayers();
             showAllPlayerHands();
+            console.userWait();
+
+            //repeat until only one player remains
+
 
         }
 
@@ -81,7 +88,7 @@ namespace CIS501_Project1
         {
             foreach (Player play in currentPlayers)
             {
-                ct.DisplayLine(play.ToString());
+                console.DisplayLine(play.ToString());
             }
         }
 
@@ -91,6 +98,40 @@ namespace CIS501_Project1
             {
                 play.DiscardAllPairs();
             }
+        }
+
+        private bool keyAlgorithim()
+        {
+            int drawer = 0;
+            int drawee = -1000;
+            bool playNext = true;
+
+            do
+            {
+                drawee = (drawer + 1) % currentPlayers.Count;
+
+                //might work
+                //if (String.Compare(currentPlayers[drawee].GetType().ToString(), "HumanPlayer") == 0)
+                if (currentPlayers[drawer].isHuman)
+                {
+                    console.DisplayLine("%%%%%%%%%%It is now the User's turn%%%%%%%%%%");
+                    console.DisplayLine(currentPlayers[drawer].ToString());
+                    console.DisplayLine(currentPlayers[drawee].ToString());
+
+                    ComputerPlayer temp = (ComputerPlayer) currentPlayers[drawee];
+                    console.DisplayLine(temp.MakeCardIndices()); //there has to be a better way
+
+
+                }
+
+
+                drawer += 1;
+                if (drawer > currentPlayers.Count - 1)
+                {
+                    drawer = 0; //might work?
+                }
+            }
+            while (playNext);
         }
     }
 }

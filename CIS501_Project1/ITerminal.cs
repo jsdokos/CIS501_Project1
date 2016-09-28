@@ -17,5 +17,7 @@ namespace CIS501_Project1
         string GetString(string prompt, int length);
 
         int GetInt(string prompt, int min, int max);
+
+        void userWait();
     }
 }

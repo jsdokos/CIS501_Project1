@@ -14,6 +14,7 @@ namespace CIS501_Project1
         public string Name; //TODO ??
         public CardDeck Deck;
         public static PlayingCard[] temp;
+        public bool isHuman;
 
         public int NumCardsInHand
         {
@@ -100,7 +101,7 @@ namespace CIS501_Project1
         public override string ToString() //TODO Wrong?
         {
             StringBuilder st = new StringBuilder();
-
+            st.Append(this.Name + " : ");
             foreach (PlayingCard card in Hand)
             {
                 st.Append(card.ToString() + " ");
@@ -112,6 +113,10 @@ namespace CIS501_Project1
         private void ReturnHandToDeck()
         {
             //TODO THIS
+            foreach (PlayingCard card in Hand)
+            {
+                Deck.ReturnCard(card);
+            }
         }
     }
 }

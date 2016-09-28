@@ -19,10 +19,11 @@ namespace CIS501_Project1
             {
                 for (int j = 1; j < 14; j++)
                 {
-                    Deck[count] = new PlayingCard(i, j, false);
+                    Deck[count] = new PlayingCard(j, i, false);
                     count++;
                 }
             }
+            Deck[count] = new PlayingCard(0, 5, false);
             //Deck[52] = new PlayingCard(5, );
         }
 
@@ -52,7 +53,7 @@ namespace CIS501_Project1
             }
         }
 
-        private void ReturnCard(PlayingCard card)
+        public void ReturnCard(PlayingCard card)
         {
             topIndex++;
             Deck[topIndex] = card;

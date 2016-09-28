@@ -12,7 +12,7 @@ namespace CIS501_Project1
 
         public HumanPlayer(int numPlayers, string name) : base(numPlayers, name)
         {
-            
+            isHuman = true;
         }
         public override void Deal(PlayingCard card)
         {
