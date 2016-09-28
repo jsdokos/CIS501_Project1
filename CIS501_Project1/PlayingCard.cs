@@ -32,7 +32,7 @@ namespace CIS501_Project1
             FaceUp = face;
         }
 
-        public override string ToString() //TODO FIX
+        public override string ToString() 
         {
             if (this.FaceUp)
             {

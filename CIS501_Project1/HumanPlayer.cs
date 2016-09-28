@@ -8,7 +8,6 @@ namespace CIS501_Project1
 {
     class HumanPlayer : Player
     {
-        //sizeof hand is (53/#players + 2)
 
         public HumanPlayer(int numPlayers, string name) : base(numPlayers, name)
         {

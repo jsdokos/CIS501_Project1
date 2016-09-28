@@ -46,7 +46,7 @@ namespace CIS501_Project1
             Random random = new Random();
             for (int i = 0; i < topIndex; i++)
             {
-                int j = random.Next(i, topIndex);
+                int j = random.Next(i, topIndex + 1);
                 PlayingCard temp = Hand[i];
                 Hand[i] = Hand[j];
                 Hand[j] = temp;
@@ -75,6 +75,8 @@ namespace CIS501_Project1
                     }
                     else
                     {
+                        Deck.ReturnCard(temp[(int)card.Rank]);
+                        Deck.ReturnCard(card);
                         temp[(int)card.Rank] = null;
                         card = null;
                     }
@@ -90,7 +92,7 @@ namespace CIS501_Project1
                     count++;
                 }
             }
-            topIndex = count;//maybe?
+            topIndex = count;
         }
 
         public virtual void Deal(PlayingCard card)
@@ -106,7 +108,6 @@ namespace CIS501_Project1
 
         public void AddCard(PlayingCard card)
         {
-            //TODO find duplicates
             topIndex++;
             Hand[topIndex] = card;
             DiscardAllPairs();
@@ -129,7 +130,6 @@ namespace CIS501_Project1
 
         private void ReturnHandToDeck()
         {
-            //TODO THIS
             foreach (PlayingCard card in Hand)
             {
                 Deck.ReturnCard(card);

@@ -147,7 +147,7 @@ namespace CIS501_Project1
                     console.DisplayLine(temp.MakeCardIndices()); //there has to be a better way
 
                     int takenCard = console.GetInt("Pick One Card from Player " + drawee + " ", 0,
-                        currentPlayers[drawee].NumCardsInHand);
+                        currentPlayers[drawee].NumCardsInHand - 1);
 
                     PlayingCard card = currentPlayers[drawee].PickCardAt(takenCard);
 
@@ -204,7 +204,7 @@ namespace CIS501_Project1
                     if (currentPlayers[i].NumCardsInHand == 0)
                     {
                         currentPlayers.Remove(currentPlayers[i]);
-                        console.DisplayLine("+++++Player " + currentPlayers[0].Name + " has finished playing.+++++");
+                        console.DisplayLine("+++++Player " + currentPlayers[i].Name + " has finished playing.+++++");
                     }
                 }
             }
